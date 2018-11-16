@@ -5,8 +5,9 @@ import java.io.IOException;
 /**
  * Text
  * <strong>flgjhdfkgjdhfgkjh</strong>
- * @see String#toString
+ *
  * @author
+ * @see String#toString
  * @since 16.18
  */
 public class Logger {
@@ -14,7 +15,7 @@ public class Logger {
         if (message == null) return; //Guard Clause
         if ("".equals(message)) throw new IllegalArgumentException();
 
-        printToConsole("primitive: " + message);
+        print("string: " + message);
 
         //===================
         if (message == null) {
@@ -33,7 +34,7 @@ public class Logger {
      * Pre-conditions: param values, state
      * Post-conditions: side effect
      * Invariants: business rules
-     *
+     * <p>
      * 2. Architecture comments & whys?
      * - JDBC -> ORM, faster
      */
@@ -49,28 +50,42 @@ public class Logger {
 
         }
         //endregion
-
-        /*
-        lfgkjdflkgjdlg
-        lfkgjdlfgkjdlfkgj
-        lfgkjdflgkjdflgk
-         */
-        printToConsole("primitive: " + message);
-        printToConsole("primitive: " + message);
-        printToConsole("primitive: " + message);
+        print("primitive: " + message);
+        print("primitive: " + message);
+        print("primitive: " + message);
     }
 
     //<=5MSLoC -> <=100k global vars
     public static int primitiveClassVar;
     public static Object refClassVar = new Object();
+
     public static void main(String[] args) {
         int localOrStackOrTempOrAutoVar = 0;
-        Logger.printToConsole("HW!!!");
+        Logger.print("HW!!!");
     }
 
-    private static void printToConsole(String s) {
-        int localVar = 0;
-        System.out.println(s);
-//        printToConsole(s); //Tail Recursion, Java - no (((
+    public static void log(int message) {
+        print("primitive: " + message);
     }
+
+    public static void log(byte message) {
+        print("primitive: " + message);
+    }
+
+    public static void log(boolean message) {
+        print("primitive: " + message);
+    }
+
+    public static void log(char message) {
+        print("char: " + message);
+    }
+
+    public static void log(Object message) {
+        print("reference: " + message);
+    }
+
+    private static void print(String s) {
+        System.out.println(s);
+    }
+
 }
