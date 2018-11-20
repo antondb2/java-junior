@@ -1,10 +1,14 @@
 package com.acme.edu.iteration02;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.TypeSafeLogger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
+
+import static java.lang.System.lineSeparator;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -21,9 +25,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
-    /*
-    TODO: implement TypeSafeLogger solution to match specification as tests
-
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
@@ -32,17 +33,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         TypeSafeLogger.log(2);
         TypeSafeLogger.log("str 2");
         TypeSafeLogger.log(0);
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "3\n" +
-            "str 2\n" +
-            "0\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains("3");
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
         //endregion
     }
+
 
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
@@ -55,13 +56,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Integer.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains("10");
+        assertSysoutContains(String.valueOf(Integer.MAX_VALUE));
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
         //endregion
     }
 
@@ -69,19 +68,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         TypeSafeLogger.log("str 1");
-        TypeSafeLogger.log((byte)10);
-        TypeSafeLogger.log((byte)Byte.MAX_VALUE);
+        TypeSafeLogger.log((byte) 10);
+        TypeSafeLogger.log((byte) Byte.MAX_VALUE);
         TypeSafeLogger.log("str 2");
         TypeSafeLogger.log(0);
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
+                "str 1\n" +
+                        "10\n" +
+                        Byte.MAX_VALUE + "\n" +
+                        "str 2\n" +
+                        "0\n"
         );
         //endregion
     }
@@ -101,14 +100,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
+                "str 1\n" +
+                        "str 2 (x2)\n" +
+                        "0\n" +
+                        "str 2\n" +
+                        "str 3 (x3)\n"
         );
         //endregion
     }
-
-    */
 }
