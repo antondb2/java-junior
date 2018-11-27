@@ -3,13 +3,13 @@ package com.acme.edu;
 
 public class TypeSafeLogger {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
-    public static final String CHAR_PREFIX = "char: ";
-    public static final String STRING_PREFIX = "string: ";
-    public static final String REFERENCE_PREFIX = "reference: ";
-    public static int sum = 0;
-    public static boolean changed = false;
-    public static int maxIntegerCounter = 0;
-
+    private static final String CHAR_PREFIX = "char: ";
+    private static final String STRING_PREFIX = "string: ";
+    private static final String REFERENCE_PREFIX = "reference: ";
+    private static int sum = 0;
+    private static boolean changed = false;
+    private static int maxIntegerCounter = 0;
+    private static String previousString = "";
     /**
      * OCP
      */
@@ -43,17 +43,19 @@ public class TypeSafeLogger {
         print(decoratedMessage);
     }
 
+    public static void log(byte message) {
+        print(PRIMITIVE_PREFIX + message);
+    }
 
     public static void flush() {
         if (changed) {
-            print(String.valueOf(sum));
-            while (maxIntegerCounter>0)
-            {
-                System.out.println(Integer.MAX_VALUE);
+            print(PRIMITIVE_PREFIX + String.valueOf(sum));
+            while (maxIntegerCounter > 0) {
+                print(PRIMITIVE_PREFIX + Integer.MAX_VALUE);
                 maxIntegerCounter--;
             }
             changed = false;
-            sum=0;
+            sum = 0;
         }
     }
 
